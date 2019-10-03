@@ -13,13 +13,13 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
 
     @Override
-    public List<Student> findAll() {
+    public Iterable<Student> findAll() {
         return studentRepository.findAll();
     }
 
     @Override
     public Student findById(Long id) {
-        return studentRepository.findById(id);
+        return studentRepository.findOne(id);
     }
 
     @Override
@@ -29,6 +29,6 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void remove(Long id) {
-        studentRepository.remove(id);
+        studentRepository.delete(id);
     }
 }

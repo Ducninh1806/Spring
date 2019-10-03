@@ -36,7 +36,7 @@ public class StudentController {
 
     @GetMapping("/student")
     public ModelAndView listStudent(){
-        List<Student> students = studentService.findAll();
+        Iterable<Student> students = studentService.findAll();
         ModelAndView modelAndView = new ModelAndView("/student/list");
         modelAndView.addObject("students", students);
         return modelAndView;
