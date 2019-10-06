@@ -15,6 +15,18 @@ public class Student {
     private String address;
     private String avatar;
 
+    @ManyToOne
+    @JoinColumn(name= "class_id")
+    private Classes classes;
+
+    public Classes getClasses() {
+        return classes;
+    }
+
+    public void setClasses(Classes classes) {
+        this.classes = classes;
+    }
+
     public Student() {
     }
 
@@ -24,6 +36,8 @@ public class Student {
         this.address = address;
         this.avatar = avatar;
     }
+
+
 
     public Long getId() {
         return id;

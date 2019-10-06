@@ -1,6 +1,8 @@
 package com.codegym;
 
 import com.codegym.repository.StudentRepository;
+import com.codegym.service.ClassesService;
+import com.codegym.service.ClassesServiceImpl;
 import com.codegym.service.StudentService;
 import com.codegym.service.StudentServiceImpl;
 import org.springframework.beans.BeansException;
@@ -118,6 +120,12 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
     public StudentService studentService(){
         return  new StudentServiceImpl();
     }
+
+    @Bean
+    public ClassesService classesService(){
+        return new ClassesServiceImpl();
+    }
+
 
 
 }

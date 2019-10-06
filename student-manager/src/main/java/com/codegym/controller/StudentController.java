@@ -1,6 +1,8 @@
 package com.codegym.controller;
 
+import com.codegym.model.Classes;
 import com.codegym.model.Student;
+import com.codegym.service.ClassesService;
 import com.codegym.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,14 @@ import java.util.List;
 public class StudentController {
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private ClassesService classesService;
+
+    @ModelAttribute("classes")
+    public Iterable<Classes>classes(){
+        return classesService.findAll();
+    }
 
     @GetMapping("/create-student")
     public ModelAndView showCreateForm(){

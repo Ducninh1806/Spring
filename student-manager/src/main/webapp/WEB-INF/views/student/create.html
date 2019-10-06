@@ -31,6 +31,10 @@
             <td><input type="text" th:field="*{avatar}"/></td>
         </tr>
         <tr>
+            <td>Class</td>
+            <td><select th:field="*{name}"><option th:each="p:${classes} " th:value="${p.id}" th:text="${p.name}"></option> </select> </td>
+        </tr>
+        <tr>
             <td></td>
             <td><input type="submit" value="Create Student"></td>
         </tr>

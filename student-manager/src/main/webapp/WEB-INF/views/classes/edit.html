@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Class</title>
+</head>
+<body>
+<h3>Edit Class</h3>
+<p><a th:href="@{/classes}">Class list</a> </p>
+
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+
+<form th:action="@{/edit-classes}" th:object="${classes}" method="post">
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>
+                <input th:field="*{name}" type="text">
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Edit class"> </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
