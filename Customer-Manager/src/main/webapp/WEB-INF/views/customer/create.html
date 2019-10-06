@@ -20,6 +20,12 @@
             <td><input type="text" th:field="*{lastName}"></td>
         </tr>
         <tr>
+            <td>Province</td>
+            <td><select th:field="*{province}">
+                <option th:each="p :${province}" th:value="${p.id}" th:text="${p.nameProvince}"></option>
+            </select></td>
+        </tr>
+        <tr>
             <td></td>
             <td><input type="submit" value="Create Customer"></td>
         </tr>

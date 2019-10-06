@@ -1,6 +1,7 @@
 package com.codegym.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "province")
@@ -11,6 +12,9 @@ public class Province {
     private Long id;
 
     private String nameProvince;
+
+    @OneToMany(targetEntity = Customer.class)
+    private List<Customer> customers;
 
     public Province() {
     }
@@ -33,5 +37,13 @@ public class Province {
 
     public void setNameProvince(String nameProvince) {
         this.nameProvince = nameProvince;
+    }
+
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
     }
 }

@@ -20,6 +20,7 @@
         <tr>
             <td th:text="${c.firstName}"></td>
             <td th:text="${c.lastName}"></td>
+            <td th:text="${c.province.nameProvince}"></td>
             <td><a th:href="@{/edit-customer/__${c.getId()}__}">Edit</a> </td>
             <td><a th:href="@{/delete-customer/__${c.getId()}__}">Delete</a> </td>
         </tr>
