@@ -13,6 +13,8 @@ public class Blog {
     private String title;
     private String content;
 
+    
+
     public Blog() {
     }
 
