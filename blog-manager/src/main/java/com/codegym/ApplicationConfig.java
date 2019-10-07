@@ -1,5 +1,7 @@
 package com.codegym;
 
+import com.codegym.service.BlogService;
+import com.codegym.service.Impl.BlogServiceImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -110,5 +112,10 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
         properties.setProperty("hibernate.hbm2ddl.auto", "update");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         return properties;
+    }
+
+    @Bean
+    public BlogService blogService(){
+        return new BlogServiceImpl();
     }
 }
