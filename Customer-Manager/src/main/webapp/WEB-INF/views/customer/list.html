@@ -7,7 +7,19 @@
 <body>
 <h3>List Customer</h3>
 
+<div>
+    <a th:href="@{'/customer'(page=${customer.number -1})}" th:if="${customer.hasPrevious()}">Previous</a>
+    <span th:text="${customer.number+1}"></span>/<span th:text="${customer.totalPages}"></span>
+    <a th:href="@{'/customer'(page=${customer.number +1})}" th:if="${customer.hasNext()}">Next</a>
+</div>
+
 <p><a href="/create-customer">Add new Customer</a> </p>
+
+<form>
+    Search by first name:
+    <input name="s" type="text">
+    <input type="submit" value="Search">
+</form><br>
 
 <table border="1">
     <tr>
@@ -26,6 +38,8 @@
             <td><a th:href="@{/delete-customer/__${c.getId()}__}">Delete</a> </td>
         </tr>
     </th:block>
+
+
 </table>
 
 </body>

@@ -5,14 +5,17 @@ import com.codegym.model.Province;
 import com.codegym.repository.CustomerRepository;
 import com.codegym.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
+
     @Override
-    public Iterable<Customer> findAll() {
-        return customerRepository.findAll();
+    public Page<Customer> findAll(Pageable pageable) {
+        return customerRepository.findAll(pageable);
     }
 
     @Override
@@ -33,6 +36,11 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Iterable<Customer> findAllProvince(Province Province) {
         return customerRepository.findAllByProvince(Province);
+    }
+
+    @Override
+    public Page<Customer> findAllByFirstNameContaining(String firstName, Pageable pageable) {
+        return customerRepository.findAllByFirstNameContaining(firstName,pageable);
     }
 
 }

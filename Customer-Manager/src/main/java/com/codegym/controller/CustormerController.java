@@ -5,12 +5,13 @@ import com.codegym.model.Province;
 import com.codegym.service.CustomerService;
 import com.codegym.service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Optional;
 
 @Controller
 public class CustormerController {
@@ -28,8 +29,13 @@ public class CustormerController {
 
 
     @GetMapping("/customer")
-    public ModelAndView showListForm(){
-        Iterable<Customer> customer =customerService.findAll();
+    public ModelAndView showListForm(@RequestParam("s") Optional<String>s, Pageable pageable){
+        Page<Customer> customer ;
+        if (s.isPresent()){
+            customer=customerService.findAllByFirstNameContaining(s.get(),pageable);
+        }else {
+            customer=customerService.findAll(pageable);
+        }
         ModelAndView modelAndView= new ModelAndView("/customer/list");
         modelAndView.addObject("customer", customer);
         return modelAndView;
@@ -84,4 +90,6 @@ public class CustormerController {
         customerService.remove(customer.getId());
         return "redirect:customer";
     }
+
+
 }
