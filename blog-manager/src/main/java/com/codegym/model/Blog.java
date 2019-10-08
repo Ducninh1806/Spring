@@ -11,6 +11,8 @@ public class Blog {
     private Long id;
 
     private String title;
+
+    @Lob
     private String content;
 
     @ManyToOne

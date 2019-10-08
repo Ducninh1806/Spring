@@ -2,10 +2,12 @@ package com.codegym.service;
 
 import com.codegym.model.Blog;
 import com.codegym.model.Category;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface BlogService  {
 
-    Iterable<Blog> findAll();
+    Page<Blog> findAll(Pageable pageable);
 
     Blog findById(Long id);
 
@@ -14,5 +16,8 @@ public interface BlogService  {
     void remove(Long id);
 
     Iterable<Blog>findAllByCategory(Category category);
+
+    Page<Blog>findAllByTitleContaining(String title,Pageable pageable);
+
 
 }

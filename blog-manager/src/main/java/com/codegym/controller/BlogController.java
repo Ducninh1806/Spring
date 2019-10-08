@@ -5,12 +5,13 @@ import com.codegym.model.Category;
 import com.codegym.service.BlogService;
 import com.codegym.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Optional;
 
 @Controller
 public class BlogController {
@@ -26,8 +27,13 @@ public class BlogController {
     }
 
     @GetMapping("/blog")
-    public ModelAndView showListForm(){
-        Iterable<Blog>blogs=blogService.findAll();
+    public ModelAndView showListForm(@RequestParam("s") Optional<String>s, Pageable pageable){
+        Page<Blog> blogs;
+        if (s.isPresent()){
+            blogs=blogService.findAllByTitleContaining(s.get(),pageable);
+        }else {
+            blogs=blogService.findAll(pageable);
+        }
         ModelAndView modelAndView = new ModelAndView("/blog/list");
         modelAndView.addObject("blog",blogs);
         return modelAndView;
@@ -44,7 +50,7 @@ public class BlogController {
     public ModelAndView saveCreate(@ModelAttribute("blog")Blog blog){
         blogService.save(blog);
             ModelAndView modelAndView= new ModelAndView("/blog/create");
-            modelAndView.addObject("blog",blog);
+            modelAndView.addObject("blog",new Blog());
             return modelAndView;
     }
 
@@ -86,5 +92,10 @@ public class BlogController {
     public String deleteBlog(@ModelAttribute("blog")Blog blog){
         blogService.remove(blog.getId());
         return "redirect:blog";
+    }
+
+    @GetMapping("/")
+    public String home(){
+        return "index";
     }
 }
