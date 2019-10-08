@@ -1,5 +1,7 @@
 package com.codegym;
 
+import com.codegym.formatter.CategoryFormatter;
+import com.codegym.model.Category;
 import com.codegym.service.BlogService;
 import com.codegym.service.CategoryService;
 import com.codegym.service.Impl.BlogServiceImpl;
@@ -13,6 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -40,7 +43,6 @@ import java.util.Properties;
 @EnableSpringDataWebSupport
 @EnableTransactionManagement
 @EnableWebMvc
-
 public class ApplicationConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {
     private ApplicationContext applicationContext;
 
@@ -124,5 +126,10 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
     @Bean
     public CategoryService categoryService(){
         return new CategoryServiceImpl();
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry){
+        registry.addFormatter(new CategoryFormatter(applicationContext.getBean(CategoryService.class)));
     }
 }

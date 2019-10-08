@@ -1,6 +1,7 @@
 package com.codegym.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "category")
@@ -11,6 +12,17 @@ public class Category {
     private Long id;
 
     private String Name;
+
+    @OneToMany(targetEntity = Blog.class)
+    private List<Blog> blog;
+
+    public List<Blog> getBlog() {
+        return blog;
+    }
+
+    public void setBlog(List<Blog> blog) {
+        this.blog = blog;
+    }
 
     public Category() {
     }

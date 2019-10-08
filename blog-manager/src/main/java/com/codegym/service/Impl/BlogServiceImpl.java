@@ -1,6 +1,7 @@
 package com.codegym.service.Impl;
 
 import com.codegym.model.Blog;
+import com.codegym.model.Category;
 import com.codegym.repository.BlogRepository;
 import com.codegym.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,4 +29,11 @@ public class BlogServiceImpl implements BlogService {
     public void remove(Long id) {
         blogRepository.delete(id);
     }
+
+    @Override
+    public Iterable<Blog> findAllByCategory(Category category) {
+        return blogRepository.findAllByCategory(category);
+    }
+
+
 }

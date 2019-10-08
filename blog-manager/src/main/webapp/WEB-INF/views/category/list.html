@@ -17,7 +17,7 @@
     </tr>
     <th:block th:each="c:${category}">
         <tr>
-            <td th:text="${c.name}"></td>
+            <td><a th:href="@{/view-category/__${c.getId()}__}"><span th:text="${c.name}"></span></a>  </td>
             <td><a th:href="@{/edit-category/__${c.getId()}__}">Edit</a> </td>
             <td><a th:href="@{/delete-category/__${c.getId()}__}">Delete</a> </td>
         </tr>

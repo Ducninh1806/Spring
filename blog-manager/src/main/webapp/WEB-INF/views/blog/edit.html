@@ -21,6 +21,15 @@
         <td><input type="text" th:field="*{content}" ></td>
     </tr>
     <tr>
+        <td>Name Province</td>
+        <td><select name="category">
+            <option th:each="c:${category}"
+                    th:value="${c.id}"
+                    th:text="${c.name}"
+                    th:selected="(${c.id}==*{category.id})"></option>
+        </select> </td>
+    </tr>
+    <tr>
         <td></td>
         <td><input type="submit" value="Edit Blog"></td>
     </tr>

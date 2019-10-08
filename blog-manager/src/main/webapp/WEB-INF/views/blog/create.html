@@ -20,10 +20,22 @@
             <td>Content Blog</td>
             <td><input type="text" th:field="*{content}"></td>
         </tr>
+
+        <tr>
+            <td>Category</td>
+            <td>
+                <select th:field="*{category}">
+                    <option th:each="c:${category}" th:value="${c.id}" th:text="${c.name}"></option>
+                </select>
+            </td>
+        </tr>
+
         <tr>
             <td></td>
             <td><input type="submit" value="Create Blog"></td>
         </tr>
+
+
     </table>
 
 </form>

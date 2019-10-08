@@ -1,7 +1,9 @@
 package com.codegym.controller;
 
 import com.codegym.model.Blog;
+import com.codegym.model.Category;
 import com.codegym.service.BlogService;
+import com.codegym.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,14 @@ import org.springframework.web.servlet.ModelAndView;
 public class BlogController {
     @Autowired
     private BlogService blogService;
+
+    @Autowired
+    private CategoryService categoryService;
+
+    @ModelAttribute("category")
+    public Iterable<Category> category(){
+        return categoryService.findAll();
+    }
 
     @GetMapping("/blog")
     public ModelAndView showListForm(){
@@ -71,12 +81,6 @@ public class BlogController {
             return modelAndView;
         }
     }
-
-//    @PostMapping("/delete-blog")
-//    public String deleteBlog(@ModelAttribute("blog")Blog blog){
-//        blogService.remove(blog.getId());
-//        return "redirect:blog";
-//    }
 
     @PostMapping("/delete-blog")
     public String deleteBlog(@ModelAttribute("blog")Blog blog){

@@ -20,6 +20,7 @@
         <tr>
             <td th:text="${b.getTitle()}"></td>
             <td th:text="${b.getContent()}"></td>
+            <td th:text="${b.category.name}"></td>
             <td><a th:href="@{/edit-blog/__${b.getId()}__}">Edit</a> </td>
             <td><a th:href="@{/delete-blog/__${b.getId()}__}">Delete</a> </td>
         </tr>

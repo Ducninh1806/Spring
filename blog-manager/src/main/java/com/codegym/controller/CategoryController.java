@@ -1,6 +1,8 @@
 package com.codegym.controller;
 
+import com.codegym.model.Blog;
 import com.codegym.model.Category;
+import com.codegym.service.BlogService;
 import com.codegym.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,11 +13,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.rmi.MarshalledObject;
+import java.util.concurrent.Callable;
 
 @Controller
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private BlogService blogService;
+
+    @GetMapping("/view-category/{id}")
+    public ModelAndView viewCategory(@PathVariable long id){
+       Category category= categoryService.findById(id);
+       if (category == null){
+           return new  ModelAndView("/error.404");
+       }
+       Iterable<Blog> blogs= blogService.findAllByCategory(category);
+        ModelAndView modelAndView = new ModelAndView("/category/view");
+        modelAndView.addObject("category",category);
+        modelAndView.addObject("blog",blogs);
+        return modelAndView;
+    }
 
     @GetMapping("/category")
     public ModelAndView showListForm(){
@@ -69,6 +88,7 @@ public class CategoryController {
         categoryService.remove(category.getId());
         return "redirect:category";
     }
+
 
 
 
