@@ -1,5 +1,9 @@
 package com.codegym;
 
+import com.codegym.repository.CustomerRepository;
+import com.codegym.repository.Impl.CustomerRepositoryImpl;
+import com.codegym.service.CustomerService;
+import com.codegym.service.Impl.CustomerServiceImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -76,5 +80,15 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
         properties.setProperty("hibernate.hbm2ddl.auto", "update");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         return properties;
+    }
+
+    @Bean
+    public CustomerService customerService(){
+        return new CustomerServiceImpl();
+    }
+
+    @Bean
+    public CustomerRepository customerRepository(){
+        return new CustomerRepositoryImpl();
     }
 }
